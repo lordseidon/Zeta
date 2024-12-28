@@ -1,1 +1,1 @@
-alert("Bello!!!")
+console.log("Hello")
