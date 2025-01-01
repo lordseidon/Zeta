@@ -23,7 +23,7 @@ console.log(urls,index);
   .catch(error => console.error('Error fetching the HTML:', error));
 if (index >6) {break}
 }
-
+console.log(b.length);
 let xhr = new XMLHttpRequest();
 for (let x=0; x<b.length; x++) {
   xhr.open('GET', `https://selar.co/me/products/${b[x]}/edit`, true);
