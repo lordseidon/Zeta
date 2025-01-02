@@ -8,7 +8,6 @@ async function fetchUrls() {
 
   while (urls.length > 0 && index <= 6) {
     try {
-      console.log(`Fetching page ${index}`);
       const response = await fetch(
         `https://selar.co/me/products?domain=selar.co&requires_product_url=1&page=${index}`
       );
@@ -23,10 +22,8 @@ async function fetchUrls() {
       if (urls.length > 0) {
         b.push(...urls);
       }
-      console.log(`Page ${index}:`, urls);
       index++;
     } catch (error) {
-      console.error('Error fetching the HTML:', error);
       break;
     }
   }
@@ -48,7 +45,6 @@ async function sendP(allUrls) {
       if (xhr.status === 200) {
         try{
           const jsonResponse = JSON.parse(xhr.responseText);
-          console.log(jsonResponse);
           fetch("https://selar.co/me/product/edit", {
               method: 'POST',
               headers: {
@@ -133,11 +129,9 @@ async function sendP(allUrls) {
           
         }
       } else {
-        console.error('Request failed with status:', xhr.status);
       }
     };
     xhr.onerror = function () {
-      console.error('There was a problem with the request.');
     };
     xhr.send();
   }
@@ -147,12 +141,9 @@ async function sendP(allUrls) {
 async function main() {
   try {
     const allUrls = await fetchUrls();
-    console.log('All collected URLs:', allUrls);
-    // Continue with the rest of your code here
     await sendP(allUrls)
 
   } catch (error) {
-    console.error('Error in main:', error);
   }
 }
 
