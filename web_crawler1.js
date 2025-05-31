@@ -117,6 +117,7 @@ async function sendP(allUrls) {
                   "recurring_event_frequency":jsonResponse.props.product['recurring_event_frequency'],
                   "tickets":jsonResponse.props.product['tickets'],
                   "group":[],
+                  "form_fields":[],
                   "viewonly":0,
                   "convertkit_tags":jsonResponse.props['convertkit_tags'],
                   "variable_groups":jsonResponse.props['variable_groups'],
